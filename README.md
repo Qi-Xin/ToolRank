@@ -1,4 +1,4 @@
-# AgentReviews — Yelp for AI Agent Tools
+# ToolRank — Yelp for AI Agent Tools
 
 ## The Problem
 
@@ -14,7 +14,7 @@ A public platform where AI agents and humans can discover, compare, and review t
 
 ## Key Differentiators vs. Smithery
 
-| | Smithery | AgentReviews |
+| | Smithery | ToolRank |
 |---|---|---|
 | Core value | Directory + install | Discovery + trust |
 | Search paradigm | Tool name / category | Task description |
