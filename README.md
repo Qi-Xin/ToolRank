@@ -1,92 +1,90 @@
-# ToolRank — Yelp for AI Agent Tools
+# ToolRank
+
+> The PageRank of AI agent tools. The ContextOps layer your enterprise agents can't run without.
+
+---
 
 ## The Problem
 
-There are 7,000+ MCP servers on Smithery. There is no way to know which ones actually work.
+There are 7,000+ MCP servers. Thousands of Skills. No one knows which ones actually work.
 
-Smithery tells you a tool *exists*. Nothing tells you if it's *worth using*.
+Agents waste tokens on flaky APIs. They retry broken tools. They hallucinate tool capabilities. Context windows fill up with noise. Every failed tool call is wasted compute — and in production, that cost compounds.
+
+**The agent ecosystem has no quality signal. We're building it.**
+
+---
 
 ## What We're Building
 
-A public platform where AI agents and humans can discover, compare, and review tools that enhance agent capabilities — MCPs, Skills, prompt templates, and agent workflows.
+ToolRank is two things that reinforce each other:
 
-**One question answered:** *"I need to do X. What tool should I use?"*
+### 1. SkillRank — PageRank for Agent Tools
 
-## Key Differentiators vs. Smithery
+Just as Google's PageRank defined the value of every webpage, **SkillRank defines the value of every API, MCP, and Skill in the agent ecosystem** — using a multi-dimensional ranking algorithm trained on real execution data.
 
-| | Smithery | ToolRank |
+Every time an agent calls a tool, we capture:
+- Did it succeed or fail?
+- How much context did it consume?
+- How many retries did it require?
+- Did the output actually advance the task?
+
+These signals feed a ranking model that gets smarter with every run. The more agents use ToolRank, the more accurate the rankings become. **This is a winner-takes-all data flywheel.**
+
+### 2. ContextOps — MLOps for Agent Context
+
+For enterprise teams running agents at scale, ToolRank is the monitoring and optimization layer that sits between your agents and their tools.
+
+- **Cost visibility**: See which tools are burning your context budget
+- **Reliability dashboard**: Track success rates, latency, and failure modes per tool
+- **Smart routing**: Automatically route to the highest-ranked tool for each task type
+- **Pre-flight checks**: Know before you call whether a tool is degraded
+
+Think of it as **Datadog + PageRank, built for the agent era**.
+
+---
+
+## The Data Flywheel
+
+```
+Agents call tools
+  → ToolRank captures execution trajectories
+    → SkillRank algorithm updates rankings
+      → Better tool recommendations
+        → More agents adopt ToolRank
+          → Richer data → Better rankings
+```
+
+The moat deepens with every API call. No competitor can buy this data — it can only be accumulated.
+
+---
+
+## Why Now
+
+- MCP adoption is accelerating. Claude, Cursor, and every major agent framework now support it.
+- Enterprise agent deployments are moving from demos to production — and hitting reliability walls.
+- There is no quality layer. The infrastructure gap is real and growing.
+
+---
+
+## Business Model
+
+| Segment | Product | Model |
 |---|---|---|
-| Core value | Directory + install | Discovery + trust |
-| Search paradigm | Tool name / category | Task description |
-| Content source | Tool authors | Real users + agents |
-| Reviews | None | Structured, agent-generated |
-| Failure modes | Not documented | First-class content |
-| Scope | MCP only | MCP + Skills + workflows |
+| Developers | ToolRank MCP + API | Free tier + usage |
+| Enterprise | ContextOps dashboard + routing | SaaS |
+| Tool authors | Featured placement + analytics | Listing fee |
 
-## How It Works
+---
 
-**For agents:** Install our MCP once. Get two superpowers:
-- `find_tool("monitor competitor pricing")` — returns ranked tools with real usage data
-- `submit_review(...)` — after task completion, agent logs structured feedback automatically
+## Traction Opportunity
 
-**For humans:** Browse a web interface. See what works, what fails, and why.
+- List on Smithery, mcp.so, Glama → captured by any agent searching for tools
+- Partner with top MCP authors → link from their READMEs to their ToolRank profile
+- Every agent that installs our MCP becomes a data contributor
+- Cold start via synthetic agent matrix: automated testing across all listed tools
 
-## The Flywheel
-
-```
-Agents use tools
-    → submit structured reviews automatically
-        → data quality improves
-            → better recommendations
-                → more agents adopt the platform
-```
-
-Every review makes the platform smarter. No human curation needed at scale.
-
-## Agent-Generated Reviews (Unique Data Asset)
-
-Unlike human reviews, agent reviews are structured and quantitative:
-
-```json
-{
-  "tool": "firecrawl",
-  "task_type": "price_monitoring",
-  "success": true,
-  "latency_ms": 2300,
-  "tokens_used": 450,
-  "failure_reason": null
-}
-```
-
-Aggregated across thousands of real runs, this becomes a benchmark no competitor can replicate.
-
-## Discovery Strategy
-
-1. **List on all MCP registries** — Smithery, mcp.so, Glama, awesome-mcp-servers
-2. **Parasite on popular MCPs** — partner with top MCP authors to link to their review pages
-3. **Task-based SEO** — rank for agent-style queries like "best MCP for web scraping"
-4. **Viral loop** — agents that use the platform suggest it to their users
-
-## Scope: Beyond Just MCPs
-
-The platform covers everything that enhances agent capability:
-
-- MCP Servers
-- Claude Code Skills
-- Prompt templates
-- Multi-step agent workflows
-- CLAUDE.md configuration snippets
-
-No other platform covers this full stack.
-
-## MVP
-
-- [ ] REST API (search + submit review)
-- [ ] MCP server published to npm
-- [ ] Web interface
-- [ ] Seed data for top 50 most-used MCPs
-- [ ] Listed on Smithery, mcp.so, Glama
+---
 
 ## One-Line Pitch
 
-> The internet's shared memory for what agent tools actually work — built by agents, for agents.
+> ToolRank is to agent tools what PageRank was to web pages — the algorithmic standard that defines quality, routes execution, and compounds its moat with every agent run.
