@@ -1,0 +1,107 @@
+[
+  {
+    "name": "brave-search",
+    "description": "Web search using Brave Search API. Best for finding technical documentation, recent news, and general web content. Returns structured search results with titles, URLs, and snippets.",
+    "category": "search",
+    "install_cmd": "npx @modelcontextprotocol/server-brave-search",
+    "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search"
+  },
+  {
+    "name": "github",
+    "description": "Full GitHub integration: read and write code, manage pull requests, issues, branches, and repositories. Essential for any code-related automation workflow.",
+    "category": "code",
+    "install_cmd": "npx @modelcontextprotocol/server-github",
+    "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/github"
+  },
+  {
+    "name": "filesystem",
+    "description": "Read and write local files and directories. Supports text and binary files, directory listing, file search, and path manipulation.",
+    "category": "files",
+    "install_cmd": "npx @modelcontextprotocol/server-filesystem",
+    "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem"
+  },
+  {
+    "name": "postgres",
+    "description": "Connect to PostgreSQL databases. Run SQL queries, inspect schemas, and manage data. Supports read and write operations with transaction support.",
+    "category": "data",
+    "install_cmd": "npx @modelcontextprotocol/server-postgres",
+    "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres"
+  },
+  {
+    "name": "sqlite",
+    "description": "Interact with SQLite databases. Run queries, create tables, insert and update data. Great for lightweight local data storage and analysis.",
+    "category": "data",
+    "install_cmd": "npx @modelcontextprotocol/server-sqlite",
+    "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/sqlite"
+  },
+  {
+    "name": "puppeteer",
+    "description": "Browser automation with Puppeteer. Navigate websites, take screenshots, fill forms, click buttons, and extract structured data from dynamic web pages.",
+    "category": "web",
+    "install_cmd": "npx @modelcontextprotocol/server-puppeteer",
+    "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer"
+  },
+  {
+    "name": "slack",
+    "description": "Send messages to Slack channels, read conversation history, manage channels, and post rich formatted messages with attachments.",
+    "category": "communication",
+    "install_cmd": "npx @modelcontextprotocol/server-slack",
+    "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/slack"
+  },
+  {
+    "name": "google-maps",
+    "description": "Search for places, get directions, find nearby businesses, and geocode addresses using Google Maps API.",
+    "category": "search",
+    "install_cmd": "npx @modelcontextprotocol/server-google-maps",
+    "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/google-maps"
+  },
+  {
+    "name": "firecrawl",
+    "description": "Scrape and crawl websites to extract clean markdown content. Excellent for competitive intelligence, content extraction, and web data collection. Handles JavaScript-rendered pages.",
+    "category": "web",
+    "install_cmd": "npx firecrawl-mcp",
+    "url": "https://github.com/mendableai/firecrawl-mcp-server"
+  },
+  {
+    "name": "tavily",
+    "description": "AI-optimized web search returning clean, structured results with high information density. Better signal-to-noise ratio than raw search for agent use cases.",
+    "category": "search",
+    "install_cmd": "npx tavily-mcp",
+    "url": "https://github.com/tavily-ai/tavily-mcp"
+  },
+  {
+    "name": "linear",
+    "description": "Manage Linear issues, projects, and teams. Create, update, and search issues, assign work, and track project progress programmatically.",
+    "category": "productivity",
+    "install_cmd": "npx @linear/mcp-server",
+    "url": "https://github.com/linear/linear-mcp"
+  },
+  {
+    "name": "notion",
+    "description": "Read and write Notion pages, databases, and blocks. Search your workspace, create structured content, and manage databases as a backend.",
+    "category": "productivity",
+    "install_cmd": "npx @notionhq/notion-mcp-server",
+    "url": "https://github.com/makenotion/notion-mcp-server"
+  },
+  {
+    "name": "aws-kb-retrieval",
+    "description": "Query AWS Knowledge Bases built on Amazon Bedrock. Semantic search over your enterprise knowledge base for RAG workflows.",
+    "category": "data",
+    "install_cmd": "npx @modelcontextprotocol/server-aws-kb-retrieval",
+    "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/aws-kb-retrieval-server"
+  },
+  {
+    "name": "memory",
+    "description": "Persistent key-value memory store for agents. Store facts, preferences, and context that persist across sessions. Uses a simple knowledge graph structure.",
+    "category": "memory",
+    "install_cmd": "npx @modelcontextprotocol/server-memory",
+    "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory"
+  },
+  {
+    "name": "sequential-thinking",
+    "description": "Dynamic problem-solving through structured thinking chains. Helps agents break down complex tasks, revise reasoning, and explore alternative approaches step by step.",
+    "category": "reasoning",
+    "install_cmd": "npx @modelcontextprotocol/server-sequential-thinking",
+    "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking"
+  }
+]
