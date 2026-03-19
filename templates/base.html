@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}ToolRank{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { brand: { 500: '#6366f1', 600: '#4f46e5' } } } }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen">
+
+  <nav class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2">
+      <span class="text-xl font-bold text-indigo-600">ToolRank</span>
+      <span class="text-xs text-gray-400 font-medium">PageRank for AI agent tools</span>
+    </a>
+    <div class="flex items-center gap-4 text-sm text-gray-500">
+      <a href="/docs" target="_blank" class="hover:text-indigo-600">API Docs</a>
+      <a href="https://github.com/Qi-Xin/ToolRank" target="_blank" class="hover:text-indigo-600">GitHub</a>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto px-6 py-10">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="text-center text-xs text-gray-400 py-8">
+    ToolRank — the internet's shared memory for what agent tools actually work
+  </footer>
+
+</body>
+</html>

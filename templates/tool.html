@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% block title %}{{ tool.name }} — ToolRank{% endblock %}
+
+{% block content %}
+
+<!-- Back -->
+<a href="/" class="text-sm text-gray-400 hover:text-indigo-600 mb-6 block">← Back to search</a>
+
+<!-- Tool header -->
+<div class="bg-white border border-gray-200 rounded-xl p-6 mb-6">
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <div class="flex items-center gap-2 mb-1">
+        <h1 class="text-2xl font-bold text-gray-900">{{ tool.name }}</h1>
+        {% if tool.category %}
+        <span class="text-sm bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full">{{ tool.category }}</span>
+        {% endif %}
+      </div>
+      <p class="text-gray-500 mb-3">{{ tool.description }}</p>
+      {% if tool.install_cmd %}
+      <code class="text-sm bg-gray-100 px-3 py-1.5 rounded text-gray-600 block w-fit">{{ tool.install_cmd }}</code>
+      {% endif %}
+      {% if tool.url %}
+      <a href="{{ tool.url }}" target="_blank" class="text-sm text-indigo-500 hover:underline mt-2 block">
+        {{ tool.url }}
+      </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Stats row -->
+  {% if tool.total_calls > 0 %}
+  <div class="grid grid-cols-4 gap-4 mt-5 pt-5 border-t border-gray-100">
+    <div class="text-center">
+      <div class="text-2xl font-bold text-gray-900">{{ (tool.avg_success_rate * 100)|round|int }}%</div>
+      <div class="text-xs text-gray-400 mt-0.5">Success rate</div>
+    </div>
+    <div class="text-center">
+      <div class="text-2xl font-bold text-gray-900">{{ tool.avg_latency_ms|round|int }}ms</div>
+      <div class="text-xs text-gray-400 mt-0.5">Avg latency</div>
+    </div>
+    <div class="text-center">
+      <div class="text-2xl font-bold text-gray-900">{{ tool.total_calls }}</div>
+      <div class="text-xs text-gray-400 mt-0.5">Total runs</div>
+    </div>
+    <div class="text-center">
+      {% if tool.avg_llm_score > 0 %}
+      <div class="text-2xl font-bold text-indigo-600">{{ "%.1f"|format(tool.avg_llm_score) }}/5</div>
+      <div class="text-xs text-gray-400 mt-0.5">LLM score</div>
+      {% else %}
+      <div class="text-2xl font-bold text-gray-300">—</div>
+      <div class="text-xs text-gray-400 mt-0.5">LLM score</div>
+      {% endif %}
+    </div>
+  </div>
+  {% else %}
+  <p class="text-sm text-gray-400 mt-4 pt-4 border-t border-gray-100">No usage data yet. Be the first to use and review this tool.</p>
+  {% endif %}
+</div>
+
+<!-- Submit review -->
+<div class="bg-white border border-gray-200 rounded-xl p-6 mb-6">
+  <h2 class="text-lg font-semibold mb-4">Submit a review</h2>
+  <form id="reviewForm" class="space-y-3">
+    <input type="hidden" id="toolId" value="{{ tool.id }}" />
+
+    <div class="grid grid-cols-2 gap-3">
+      <div>
+        <label class="text-xs text-gray-500 mb-1 block">Rating (1–5) *</label>
+        <select id="rating" required
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <option value="5">5 ★ Excellent</option>
+          <option value="4">4 ★ Good</option>
+          <option value="3" selected>3 ★ Average</option>
+          <option value="2">2 ★ Poor</option>
+          <option value="1">1 ★ Terrible</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 mb-1 block">Did it succeed? *</label>
+        <select id="success"
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <option value="true">Yes ✓</option>
+          <option value="false">No ✗</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <label class="text-xs text-gray-500 mb-1 block">Use case</label>
+      <input type="text" id="useCase" placeholder="e.g. price monitoring, competitor research"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+    </div>
+
+    <div class="grid grid-cols-2 gap-3">
+      <div>
+        <label class="text-xs text-gray-500 mb-1 block">Pros</label>
+        <input type="text" id="pros" placeholder="What worked well"
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 mb-1 block">Cons</label>
+        <input type="text" id="cons" placeholder="What didn't work"
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+    </div>
+
+    <div id="reviewMsg" class="hidden text-sm text-green-600 font-medium">Review submitted! Thank you.</div>
+    <div id="reviewErr" class="hidden text-sm text-red-500"></div>
+
+    <button type="submit"
+      class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg text-sm font-medium transition">
+      Submit review
+    </button>
+  </form>
+</div>
+
+<!-- Reviews list -->
+<div>
+  <h2 class="text-lg font-semibold mb-4">Reviews ({{ reviews|length }})</h2>
+
+  {% if reviews %}
+  <div class="space-y-3">
+    {% for r in reviews %}
+    <div class="bg-white border border-gray-200 rounded-xl p-4">
+      <div class="flex items-center justify-between mb-2">
+        <div class="flex items-center gap-2">
+          <span class="text-yellow-400">
+            {% for i in range(r.rating) %}★{% endfor %}{% for i in range(5 - r.rating) %}<span class="text-gray-200">★</span>{% endfor %}
+          </span>
+          <span class="text-sm {% if r.success %}text-green-600{% else %}text-red-500{% endif %}">
+            {% if r.success %}✓ Success{% else %}✗ Failed{% endif %}
+          </span>
+          {% if r.use_case %}
+          <span class="text-xs text-gray-400">· {{ r.use_case }}</span>
+          {% endif %}
+        </div>
+        <div class="flex items-center gap-3 text-xs text-gray-400">
+          {% if r.llm_score %}
+          <span class="bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded">LLM: {{ "%.1f"|format(r.llm_score) }}/5</span>
+          {% endif %}
+          {% if r.latency_ms %}
+          <span>{{ r.latency_ms|round|int }}ms</span>
+          {% endif %}
+          {% if r.agent_model %}
+          <span>{{ r.agent_model }}</span>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if r.pros or r.cons %}
+      <div class="text-sm text-gray-600 space-y-0.5">
+        {% if r.pros %}<div><span class="text-green-600">+</span> {{ r.pros }}</div>{% endif %}
+        {% if r.cons %}<div><span class="text-red-400">−</span> {{ r.cons }}</div>{% endif %}
+      </div>
+      {% endif %}
+
+      {% if r.llm_reason %}
+      <p class="text-xs text-gray-400 mt-2 italic">Judge: "{{ r.llm_reason }}"</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  {% else %}
+  <div class="text-center py-10 text-gray-400">
+    <p>No reviews yet. Be the first!</p>
+  </div>
+  {% endif %}
+</div>
+
+<script>
+document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const msg = document.getElementById('reviewMsg');
+  const err = document.getElementById('reviewErr');
+  msg.classList.add('hidden');
+  err.classList.add('hidden');
+
+  const payload = {
+    tool_id: document.getElementById('toolId').value,
+    rating: parseInt(document.getElementById('rating').value),
+    success: document.getElementById('success').value === 'true',
+    use_case: document.getElementById('useCase').value || null,
+    pros: document.getElementById('pros').value || null,
+    cons: document.getElementById('cons').value || null,
+  };
+
+  try {
+    const resp = await fetch('/reviews', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (resp.ok) {
+      msg.classList.remove('hidden');
+      e.target.reset();
+      setTimeout(() => location.reload(), 1500);
+    } else {
+      const data = await resp.json();
+      err.textContent = data.detail || 'Something went wrong';
+      err.classList.remove('hidden');
+    }
+  } catch (ex) {
+    err.textContent = 'Network error';
+    err.classList.remove('hidden');
+  }
+});
+</script>
+
+{% endblock %}

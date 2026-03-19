@@ -5,7 +5,8 @@ from datetime import datetime
 from typing import Optional
 from contextlib import contextmanager
 
-DB_PATH = "toolrank.db"
+import os as _os
+DB_PATH = _os.environ.get("DB_PATH", "toolrank.db")
 
 
 def get_db_path() -> str:
