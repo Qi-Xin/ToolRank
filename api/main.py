@@ -39,9 +39,23 @@ async def _evaluator_loop():
             logging.getLogger(__name__).error(f"Evaluator error: {e}")
 
 
+def _reembed_all():
+    """Re-compute embeddings for all tools using the current provider."""
+    provider = get_provider()
+    tools = db.list_tools()
+    count = 0
+    for tool in tools:
+        embedding = provider.embed(tool["description"])
+        db.update_tool_embedding(tool["id"], embedding)
+        count += 1
+    return count
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     db.init_db()
+    # Re-embed all tools on startup so embeddings match the active provider
+    await asyncio.get_event_loop().run_in_executor(None, _reembed_all)
     task = asyncio.create_task(_evaluator_loop())
     yield
     task.cancel()
@@ -170,8 +184,14 @@ def submit_log(body: ExecutionLogCreate):
 @app.post("/admin/evaluate")
 async def trigger_evaluation(limit: int = Query(default=20, ge=1, le=100)):
     """Manually trigger LLM-as-Judge evaluation batch."""
-    result = await run_evaluation_batch(limit=limit)
-    return result
+    return await run_evaluation_batch(limit=limit)
+
+
+@app.post("/admin/reembed")
+async def trigger_reembed():
+    """Re-compute embeddings for all tools using the current provider."""
+    count = await asyncio.get_event_loop().run_in_executor(None, _reembed_all)
+    return {"reembedded": count}
 
 
 # ── Health ────────────────────────────────────────────────────────────────────
