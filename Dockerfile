@@ -6,11 +6,11 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libgomp1 && rm -rf /var/lib/apt/lists/*
 
-# Install Python deps
-RUN pip install --no-cache-dir fastapi "uvicorn[standard]" pydantic httpx \
-    jinja2 python-multipart mcp anthropic fastembed
+# Install Python deps — copy requirements first for layer caching
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Pre-download the ONNX embedding model (~130MB) so first request is instant
+# Pre-download the ONNX embedding model (~130MB) into the image
 RUN python -c "from fastembed import TextEmbedding; TextEmbedding('BAAI/bge-small-en-v1.5')"
 
 COPY . .
