@@ -35,6 +35,25 @@ class MockEmbeddingProvider:
         return self.DIM
 
 
+class FastEmbedProvider:
+    """Uses fastembed (ONNX, no PyTorch, ~130MB model). Install: pip install fastembed"""
+
+    MODEL = "BAAI/bge-small-en-v1.5"
+
+    def __init__(self):
+        try:
+            from fastembed import TextEmbedding
+            self._model = TextEmbedding(model_name=self.MODEL)
+        except ImportError:
+            raise ImportError("Run: pip install fastembed")
+
+    def embed(self, text: str) -> list[float]:
+        return list(next(self._model.embed([text])))
+
+    def dim(self) -> int:
+        return 384
+
+
 class SentenceTransformerProvider:
     """Uses sentence-transformers (local, no API key). Install: pip install sentence-transformers"""
 
@@ -85,6 +104,10 @@ def get_default_provider() -> EmbeddingProvider:
             return OpenAIEmbeddingProvider()
         except Exception:
             pass
+    try:
+        return FastEmbedProvider()
+    except Exception:
+        pass
     try:
         return SentenceTransformerProvider()
     except Exception:

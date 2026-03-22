@@ -2,13 +2,16 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install deps
-COPY requirements.txt .
-RUN pip install --no-cache-dir fastapi "uvicorn[standard]" pydantic httpx \
-    jinja2 python-multipart mcp anthropic sentence-transformers
+# System deps for fastembed ONNX runtime
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgomp1 && rm -rf /var/lib/apt/lists/*
 
-# Pre-download the embedding model so first request isn't slow
-RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
+# Install Python deps
+RUN pip install --no-cache-dir fastapi "uvicorn[standard]" pydantic httpx \
+    jinja2 python-multipart mcp anthropic fastembed
+
+# Pre-download the ONNX embedding model (~130MB) so first request is instant
+RUN python -c "from fastembed import TextEmbedding; TextEmbedding('BAAI/bge-small-en-v1.5')"
 
 COPY . .
 
