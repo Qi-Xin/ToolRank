@@ -1,9 +1,9 @@
 """
-ToolRank Tracker SDK
+SkillRank Tracker SDK
 A lightweight decorator for implicit tool call tracking.
 
 Usage:
-    from toolrank import track_tool
+    from skillrank import track_tool
 
     @track_tool("brave-search", api_url="http://localhost:8000")
     def search_web(query: str) -> str:
@@ -30,12 +30,12 @@ def track_tool(
     agent_model: Optional[str] = None,
 ):
     """
-    Decorator that wraps a tool call and automatically logs execution data to ToolRank.
+    Decorator that wraps a tool call and automatically logs execution data to SkillRank.
     Works with both sync and async functions.
 
     Args:
-        tool_name: Name of the tool as registered in ToolRank
-        api_url: ToolRank API base URL
+        tool_name: Name of the tool as registered in SkillRank
+        api_url: SkillRank API base URL
         agent_model: The LLM model making the call (e.g. "claude-sonnet-4-6")
     """
     def decorator(fn: Callable) -> Callable:

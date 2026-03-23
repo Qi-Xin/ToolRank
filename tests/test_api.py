@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 # Use a temp DB for each test session
 _tmp = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
 _tmp.close()
-os.environ["TOOLRANK_TEST_DB"] = _tmp.name
+os.environ["SKILLRANK_TEST_DB"] = _tmp.name
 
 import api.database as db
 db.set_db_path(_tmp.name)

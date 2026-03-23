@@ -3,7 +3,7 @@ import asyncio
 import time
 import pytest
 from unittest.mock import patch, MagicMock
-from sdk.toolrank.tracker import track_tool, _estimate_tokens, _build_payload
+from sdk.skillrank.tracker import track_tool, _estimate_tokens, _build_payload
 
 
 class TestEstimateTokens:
@@ -57,7 +57,7 @@ class TestSyncDecorator:
     def test_measures_latency(self):
         call_log = []
 
-        with patch("sdk.toolrank.tracker._log_background") as mock_log:
+        with patch("sdk.skillrank.tracker._log_background") as mock_log:
             mock_log.side_effect = lambda *args, **kwargs: call_log.append(args)
 
             @track_tool("test-tool", api_url="http://localhost:9999")
@@ -75,7 +75,7 @@ class TestSyncDecorator:
     def test_logs_failure_on_exception(self):
         call_log = []
 
-        with patch("sdk.toolrank.tracker._log_background") as mock_log:
+        with patch("sdk.skillrank.tracker._log_background") as mock_log:
             mock_log.side_effect = lambda *args, **kwargs: call_log.append(args)
 
             @track_tool("test-tool", api_url="http://localhost:9999")
@@ -110,7 +110,7 @@ class TestAsyncDecorator:
     def test_async_measures_latency(self):
         call_log = []
 
-        with patch("sdk.toolrank.tracker._log_async") as mock_log:
+        with patch("sdk.skillrank.tracker._log_async") as mock_log:
             mock_log.side_effect = lambda *args, **kwargs: call_log.append(args)
 
             @track_tool("test-tool", api_url="http://localhost:9999")

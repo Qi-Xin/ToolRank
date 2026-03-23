@@ -1,4 +1,4 @@
-# ToolRank
+# SkillRank
 
 > The PageRank of AI agent tools. The ContextOps layer your enterprise agents can't run without.
 
@@ -16,7 +16,7 @@ Agents waste tokens on flaky APIs. They retry broken tools. They hallucinate too
 
 ## What We're Building
 
-ToolRank is two things that reinforce each other:
+SkillRank is two things that reinforce each other:
 
 ### 1. SkillRank — PageRank for Agent Tools
 
@@ -28,11 +28,11 @@ Every time an agent calls a tool, we capture:
 - How many retries did it require?
 - Did the output actually advance the task?
 
-These signals feed a ranking model that gets smarter with every run. The more agents use ToolRank, the more accurate the rankings become. **This is a winner-takes-all data flywheel.**
+These signals feed a ranking model that gets smarter with every run. The more agents use SkillRank, the more accurate the rankings become. **This is a winner-takes-all data flywheel.**
 
 ### 2. ContextOps — MLOps for Agent Context
 
-For enterprise teams running agents at scale, ToolRank is the monitoring and optimization layer that sits between your agents and their tools.
+For enterprise teams running agents at scale, SkillRank is the monitoring and optimization layer that sits between your agents and their tools.
 
 - **Cost visibility**: See which tools are burning your context budget
 - **Reliability dashboard**: Track success rates, latency, and failure modes per tool
@@ -47,10 +47,10 @@ Think of it as **Datadog + PageRank, built for the agent era**.
 
 ```
 Agents call tools
-  → ToolRank captures execution trajectories
+  → SkillRank captures execution trajectories
     → SkillRank algorithm updates rankings
       → Better tool recommendations
-        → More agents adopt ToolRank
+        → More agents adopt SkillRank
           → Richer data → Better rankings
 ```
 
@@ -70,7 +70,7 @@ The moat deepens with every API call. No competitor can buy this data — it can
 
 | Segment | Product | Model |
 |---|---|---|
-| Developers | ToolRank MCP + API | Free tier + usage |
+| Developers | SkillRank MCP + API | Free tier + usage |
 | Enterprise | ContextOps dashboard + routing | SaaS |
 | Tool authors | Featured placement + analytics | Listing fee |
 
@@ -79,7 +79,7 @@ The moat deepens with every API call. No competitor can buy this data — it can
 ## Traction Opportunity
 
 - List on Smithery, mcp.so, Glama → captured by any agent searching for tools
-- Partner with top MCP authors → link from their READMEs to their ToolRank profile
+- Partner with top MCP authors → link from their READMEs to their SkillRank profile
 - Every agent that installs our MCP becomes a data contributor
 - Cold start via synthetic agent matrix: automated testing across all listed tools
 
@@ -87,4 +87,4 @@ The moat deepens with every API call. No competitor can buy this data — it can
 
 ## One-Line Pitch
 
-> ToolRank is to agent tools what PageRank was to web pages — the algorithmic standard that defines quality, routes execution, and compounds its moat with every agent run.
+> SkillRank is to agent tools what PageRank was to web pages — the algorithmic standard that defines quality, routes execution, and compounds its moat with every agent run.

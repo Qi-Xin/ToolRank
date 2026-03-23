@@ -1,4 +1,4 @@
-# ToolRank — One-Pager
+# SkillRank — One-Pager
 
 ## The Opportunity in One Sentence
 
@@ -20,7 +20,7 @@ The agent ecosystem is growing at 46% CAGR. The infrastructure to support it doe
 
 ## Solution
 
-**ToolRank = SkillRank algorithm + ContextOps platform**
+**SkillRank = SkillRank algorithm + ContextOps platform**
 
 **SkillRank** is the ranking algorithm at the core. Every agent tool call produces a structured execution signal:
 - Success/failure rate
@@ -46,13 +46,13 @@ These signals feed a multi-dimensional ranking model — the PageRank of agent t
 | Adjacent | MLOps / AI Infra | $2.3B | $25.4B |
 | Beachhead | Agent tooling & observability | ~$500M | ~$5B |
 
-ToolRank sits at the intersection of all three. As agent deployments scale, the tooling layer scales with it — non-optionally.
+SkillRank sits at the intersection of all three. As agent deployments scale, the tooling layer scales with it — non-optionally.
 
 ---
 
 ## Competitive Landscape
 
-| | ToolRank | Smithery | LangSmith | Datadog AI |
+| | SkillRank | Smithery | LangSmith | Datadog AI |
 |---|---|---|---|---|
 | Tool discovery | ✅ Task-first, ranked | ✅ Directory only | ❌ | ❌ |
 | Quality signal | ✅ Algorithmic, agent-generated | ❌ | Partial | Partial |
@@ -85,7 +85,7 @@ ToolRank sits at the intersection of all three. As agent deployments scale, the 
 
 **The data flywheel is the moat.**
 
-Every agent that installs ToolRank becomes a data contributor. Rankings improve. Better rankings attract more agents. More agents generate more data. This loop cannot be purchased — it can only be built over time.
+Every agent that installs SkillRank becomes a data contributor. Rankings improve. Better rankings attract more agents. More agents generate more data. This loop cannot be purchased — it can only be built over time.
 
 By the time a competitor decides to build this, we have 12–18 months of proprietary execution trajectory data they cannot replicate.
 
@@ -93,7 +93,7 @@ By the time a competitor decides to build this, we have 12–18 months of propri
 
 ## Go-To-Market
 
-1. **Parasite distribution:** List on Smithery, mcp.so, Glama. Partner with top 20 MCP authors to link to ToolRank profiles from their READMEs.
+1. **Parasite distribution:** List on Smithery, mcp.so, Glama. Partner with top 20 MCP authors to link to SkillRank profiles from their READMEs.
 2. **Cold start:** Synthetic agent matrix runs benchmarks on all listed tools. Day-one data, day-one rankings.
 3. **Developer flywheel:** Free tier generates data. Enterprise tier generates revenue.
 4. **SEO:** Own task-based queries — "best MCP for web scraping", "agent tool for GitHub automation."
@@ -110,4 +110,4 @@ By the time a competitor decides to build this, we have 12–18 months of propri
 
 ## One-Line Pitch
 
-> ToolRank is to agent tools what PageRank was to web pages — the algorithmic standard that defines quality, routes execution, and deepens its moat with every agent run.
+> SkillRank is to agent tools what PageRank was to web pages — the algorithmic standard that defines quality, routes execution, and deepens its moat with every agent run.

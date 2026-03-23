@@ -1,5 +1,5 @@
 """
-ToolRank MCP Server
+SkillRank MCP Server
 Exposes three tools to any MCP-compatible agent:
   - find_tool(task): find best tools for a task
   - get_reviews(tool_name): get reviews for a specific tool
@@ -13,9 +13,9 @@ from mcp.server import Server
 from mcp.server.stdio import stdio_server
 from mcp import types
 
-API_BASE = os.environ.get("TOOLRANK_API_URL", "http://localhost:8000")
+API_BASE = os.environ.get("SKILLRANK_API_URL", "http://localhost:8000")
 
-server = Server("toolrank")
+server = Server("skillrank")
 
 
 def _client() -> httpx.AsyncClient:
@@ -205,7 +205,7 @@ async def _submit_review(client: httpx.AsyncClient, args: dict) -> list[types.Te
 
     return [types.TextContent(
         type="text",
-        text=f"Review submitted for **{args['tool_name']}**. Thank you for contributing to ToolRank!",
+        text=f"Review submitted for **{args['tool_name']}**. Thank you for contributing to SkillRank!",
     )]
 
 

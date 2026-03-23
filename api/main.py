@@ -70,7 +70,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="ToolRank API",
+    title="SkillRank API",
     description="SkillRank — discover, compare, and review AI agent tools",
     version="0.1.0",
     lifespan=lifespan,

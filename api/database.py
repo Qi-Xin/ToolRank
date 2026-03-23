@@ -6,7 +6,7 @@ from typing import Optional
 from contextlib import contextmanager
 
 import os as _os
-DB_PATH = _os.environ.get("DB_PATH", "toolrank.db")
+DB_PATH = _os.environ.get("DB_PATH", "skillrank.db")
 
 
 def get_db_path() -> str:

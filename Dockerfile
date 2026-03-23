@@ -8,7 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-ENV DB_PATH=/data/toolrank.db
+ENV DB_PATH=/data/skillrank.db
 ENV PORT=8000
 
 RUN mkdir -p /data
