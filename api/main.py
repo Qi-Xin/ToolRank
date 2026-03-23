@@ -99,9 +99,10 @@ def home(request: Request, q: Optional[str] = None):
         results = db.list_tools()
         results.sort(key=lambda t: t.get("avg_success_rate", 0), reverse=True)
         results = results[:10]
-    return templates.TemplateResponse("index.html", {
-        "request": request, "query": q or "", "results": results,
-    })
+    return templates.TemplateResponse(
+        request, "index.html",
+        context={"query": q or "", "results": results},
+    )
 
 
 @app.get("/tools/{tool_id}/page", response_class=HTMLResponse)
@@ -110,9 +111,10 @@ def tool_page(request: Request, tool_id: str):
     if not tool:
         raise HTTPException(status_code=404, detail="Tool not found")
     reviews = db.get_reviews_for_tool(tool_id)
-    return templates.TemplateResponse("tool.html", {
-        "request": request, "tool": tool, "reviews": reviews,
-    })
+    return templates.TemplateResponse(
+        request, "tool.html",
+        context={"tool": tool, "reviews": reviews},
+    )
 
 
 # ── Tools API ─────────────────────────────────────────────────────────────────
