@@ -19,8 +19,12 @@ from .embeddings import get_default_provider, EmbeddingProvider
 from .ranking import rank_tools
 from .evaluator import run_evaluation_batch
 
-BASE_DIR = pathlib.Path(__file__).parent.parent
-templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+TEMPLATE_DIR = BASE_DIR / "templates"
+if not TEMPLATE_DIR.exists():
+    # Fallback for containerized environments
+    TEMPLATE_DIR = pathlib.Path("/app/templates")
+templates = Jinja2Templates(directory=str(TEMPLATE_DIR))
 
 EVAL_INTERVAL = int(os.environ.get("EVAL_INTERVAL_SECONDS", "300"))  # 5 min default
 
