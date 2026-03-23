@@ -6,7 +6,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from api import database as db
-from api.embeddings import get_default_provider
+from api.embeddings import get_default_provider, TFIDFEmbeddingProvider
 
 SEED_FILE = os.path.join(os.path.dirname(__file__), "../seed_data/top_mcps.json")
 
@@ -17,6 +17,10 @@ def seed():
 
     with open(SEED_FILE) as f:
         tools = json.load(f)
+
+    # Fit TF-IDF on all descriptions before inserting
+    if isinstance(provider, TFIDFEmbeddingProvider):
+        provider.fit([t["description"] for t in tools])
 
     inserted = 0
     skipped = 0

@@ -43,6 +43,10 @@ def _reembed_all():
     """Re-compute embeddings for all tools using the current provider."""
     provider = get_provider()
     tools = db.list_tools()
+    # Fit TF-IDF on the full corpus before embedding
+    from .embeddings import TFIDFEmbeddingProvider
+    if isinstance(provider, TFIDFEmbeddingProvider):
+        provider.fit([t["description"] for t in tools])
     count = 0
     for tool in tools:
         embedding = provider.embed(tool["description"])
